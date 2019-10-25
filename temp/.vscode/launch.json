@@ -6,6 +6,24 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Foo",
+            "request": "launch",
+            "mainClass": "Foo"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Horse",
+            "request": "launch",
+            "mainClass": "Horse"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Shock",
+            "request": "launch",
+            "mainClass": "Shock"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Cat",
             "request": "launch",
             "mainClass": "Cat"
