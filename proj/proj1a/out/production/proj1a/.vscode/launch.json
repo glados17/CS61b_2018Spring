@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - LinkedListDequeTest",
+            "request": "launch",
+            "mainClass": "LinkedListDequeTest",
+            "projectName": "proj1a_9d63ba95"
+        }
+    ]
+}

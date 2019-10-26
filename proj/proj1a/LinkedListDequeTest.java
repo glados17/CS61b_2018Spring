@@ -1,4 +1,10 @@
 /** Performs some basic linked list tests. */
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+
 public class LinkedListDequeTest {
 	
 	/* Utility method for printing out empty checks. */
@@ -36,13 +42,13 @@ public class LinkedListDequeTest {
 	public static void addIsEmptySizeTest() {
 		System.out.println("Running add/isEmpty/Size test.");
 		System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
-		/*
+//		/*
 		LinkedListDeque<String> lld1 = new LinkedListDeque<String>();
 
 		boolean passed = checkEmpty(true, lld1.isEmpty());
 
 		lld1.addFirst("front");
-		
+
 		// The && operator is the same as "and" in Python.
 		// It's a binary operator that returns true if both arguments true, and false otherwise.
 		passed = checkSize(1, lld1.size()) && passed;
@@ -58,7 +64,7 @@ public class LinkedListDequeTest {
 		lld1.printDeque();
 
 		printTestStatus(passed);
-		*/
+//		*/
 	}
 
 	/** Adds an item, then removes an item, and ensures that dll is empty afterwards. */
@@ -67,7 +73,7 @@ public class LinkedListDequeTest {
 		System.out.println("Running add/remove test.");
 
 		System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
-		/*
+//		/*
 		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
 		// should be empty 
 		boolean passed = checkEmpty(true, lld1.isEmpty());
@@ -81,8 +87,57 @@ public class LinkedListDequeTest {
 		passed = checkEmpty(true, lld1.isEmpty()) && passed;
 
 		printTestStatus(passed);
-		*/
+//		*/
 	}
+
+	@Test
+	public void testLinkedListDeque1() {
+		LinkedListDeque L =new LinkedListDeque <Integer> (3);
+		L.addFirst(2);
+		L.addFirst(1);
+
+		assertEquals(L.get(2), 3);
+	}
+
+	@Test
+	public void testLinkedListDeque2() {
+		LinkedListDeque L =new LinkedListDeque <Integer> ();
+		L.addLast(3);
+		L.addLast(2);
+		L.addLast(1);
+
+		assertEquals(L.get(2), 1);
+		assertEquals(L.get(1), 2);
+		assertEquals(L.get(0), 3);
+	}
+
+	@Test
+	public void testDequeRemoveEmpty() {
+		LinkedListDeque L =new LinkedListDeque <Integer> (3);
+		L.addLast(2);
+		L.addLast(1);
+		L.removeFirst();
+		L.removeLast();
+		L.removeLast();
+		assertTrue(L.isEmpty());
+	}
+
+
+	@Test
+	public void testDequePrint() {
+		LinkedListDeque L =new LinkedListDeque <Integer> (3);
+		L.addLast(2);
+		L.addLast(1);
+//		L.removeLast();
+		L.printDeque();
+	}
+
+	@Test
+	public void testDequeof() {
+		LinkedListDeque L = LinkedListDeque.of(1,2,3,4,5,6);
+		L.printDeque();
+	}
+
 
 	public static void main(String[] args) {
 		System.out.println("Running tests.\n");
