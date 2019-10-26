@@ -116,17 +116,20 @@ public class ArrayDeque <T> {
         }
     }
 
-    public void arrayRemoveFirst(){
+    public T arrayRemoveFirst(){
         nextFirst = getUpdateFirst(-1);
         size--;
+        T res = arr[nextFirst];
         arr[nextFirst] = null;
+        return res;
     }
 
     public void arrayRemoveLast(){
         nextLast = getUpdateLast(-1);
         size--;
-        arr[nextFirst] = null;
-    }
+        T res = arr[nextLast];
+        arr[nextLast] = null;
+    } return resl
 
     public T arrayGet(int index){
         int realIndex = nextFirst + 1 + index;
