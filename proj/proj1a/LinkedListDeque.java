@@ -9,67 +9,48 @@ public class LinkedListDeque<LochNess> {
     /**StuffNode is the nakedness linked-list within.*/
     private class StuffNode {
         public LochNess item;
-        public StuffNode rest;
+        public StuffNode next;
         public StuffNode prev;
 
-        public StuffNode(LochNess i, StuffNode n , StuffNode m) {
+        public StuffNode (LochNess i, StuffNode n , StuffNode m) {
             item = i;
-            rest = n;
+            next = n;
             prev = m;
         }
     }
 
 
-/** a way without sentinel*/
-    private StuffNode first;
-    private StuffNode last;
+    /** a way without sentinel*/
+    private StuffNode sentinel;
+    private StuffNode sentinelBack;
     private int size;
 
-    public LinkedListDeque(LochNess x){
-        first = new StuffNode(x, null, null);
-        size = 1;
-        last = first;
-    }
-
-    public LinkedListDeque(){
-        first = null;
+    public LinkedListDeque() {
+        sentinel = new StuffNode(null, null, null);
+        sentinel.prev = sentinel;
+        sentinel.next = sentinel;
         size = 0;
-        last = first;
     }
 
+//    public LinkedListDeque(LochNess x){
+//        new LinkedListDeque();
+//        addFirst(x);
+//    }
 
     public void addFirst(LochNess item){
-        if (first == null){
-            first = new StuffNode(item, null, null);
-            size = 1;
-            last = first;
-        }
-        else {
-//            first.prev = first;
-            first = new StuffNode(item, first, null);
-            first.rest.prev = first;
-            size++;
-        }
+        sentinel.next = new StuffNode (item, sentinel.next, sentinel);
+        sentinel.next.next.prev = sentinel.next;
+        size++;
     }
 
     public void addLast(LochNess item){
-        if (first == null){
-            first = new StuffNode(item, null, null);
-            size = 1;
-            last = first;
-        }
-        else {
-            last.rest = new StuffNode(item, null, last);
-            last = last.rest;
-            size++;
-        }
+        sentinel.prev = new StuffNode (item, sentinel, sentinel.prev);
+        sentinel.prev.prev.next = sentinel.prev;
+        size++;
     }
 
     public boolean isEmpty(){
-        if (size == 0){
-            return true;
-        }
-        return false;
+        return size == 0;
     }
 
     public int size(){
@@ -77,95 +58,61 @@ public class LinkedListDeque<LochNess> {
     }
 
     public void printDeque(){
-        StuffNode p = first;
-        String res = "";
-        while (p != null){
-            res += p.item + " ";
+        StuffNode p = sentinel.next;
+        while (p.next != sentinel){
             System.out.print(p.item);
-            p = p.rest;
-            if (p != null){
-                System.out.print(' ');
-            }
+            System.out.print(' ');
+            p = p.next;
         }
-//        System.out.println(res);
+        System.out.println(p.item);
+        System.out.print(' ');
     }
 
-    /**the remove parts are ugly because I didn't use sentinel for them */
     public LochNess removeFirst(){
-        if(first != null && first.rest != null){
-            LochNess res = first.item;
-            first = first.rest;
-            first.prev = null;
-            size--;
-            return res;
-        }
-        else if(first.rest == null){
-            size--;
-            return null;
-        }return null;
+        LochNess res = sentinel.next.item;
+        sentinel.next = sentinel.next.next;
+        size--;
+        return res;
     }
 
     public LochNess removeLast(){
-        if (last != null && last.prev != null){
-            LochNess res = last.item;
-            last = last.prev;
-            last.rest = null;
-            size--;
-        }
-        else if (last.prev == null){
-            size--;
-            return null;
-        }return null;
+        LochNess res = sentinel.prev.item;
+        sentinel.prev = sentinel.prev.prev;
+        size--;
+        return res;
     }
 
     public LochNess get(int index){
-        if (size == 0){
+        if (index > size - 1){
             return null;
         }
-        StuffNode p = first;
-        for (int i = 0; i < index; i++){
-            if (p.rest == null){
-                return null;
-            }
-            p = p.rest;
+        StuffNode p = sentinel;
+        for (int i = 0; i <index; i++, p = p.next){
         }
-        return p.item;
+        return p.next.item;
     }
 
     /** the LinkedListDeque is with little methord to recursive, but the StuffNode dose.*/
     public LochNess getRecursiveHelper(int index, StuffNode p){
-        if (p == null){
-            return null;
-        }
-        else if (index == 0) {
-            return p.item;
-        } return getRecursiveHelper(index - 1, p.rest);
-
-
+        if (index == 0) {
+            return p.next.item;
+        } return getRecursiveHelper(index - 1, p.next);
     }
 
     public LochNess getRecursive(int index){
         if (size == 0){
             return null;
         }
-        return getRecursiveHelper(index, first);
+        return getRecursiveHelper(index, sentinel);
     }
 
     /**It seems have to be a static, I don't know why, and I don't know haw to make it generic type
      * whatever, it is just for test, and I will find them out later */
     public static LinkedListDeque of(Integer... args){
-        LinkedListDeque result, p;
-        if (args.length > 0) {
-            result = new LinkedListDeque(args[0]);
-        } else {
-            result = new LinkedListDeque();
-            return null;
-        }
-        int k;
-        for (k = 1; k < args.length; k += 1) {
-            result.addLast(args[k]);
+        LinkedListDeque result = new LinkedListDeque();
+        for (int i = 0; i < args.length; i++){
+            result.addLast(args[i]);
         }
         return result;
     }
-
 }

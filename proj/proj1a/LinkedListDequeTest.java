@@ -43,7 +43,7 @@ public class LinkedListDequeTest {
 		System.out.println("Running add/isEmpty/Size test.");
 		System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
 //		/*
-		LinkedListDeque<String> lld1 = new LinkedListDeque<String>();
+		LinkedListDequeNoSen<String> lld1 = new LinkedListDequeNoSen<String>();
 
 		boolean passed = checkEmpty(true, lld1.isEmpty());
 
@@ -74,7 +74,7 @@ public class LinkedListDequeTest {
 
 		System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
 //		/*
-		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+		LinkedListDequeNoSen<Integer> lld1 = new LinkedListDequeNoSen<Integer>();
 		// should be empty 
 		boolean passed = checkEmpty(true, lld1.isEmpty());
 
@@ -92,28 +92,37 @@ public class LinkedListDequeTest {
 
 	@Test
 	public void testLinkedListDeque1() {
-		LinkedListDeque L =new LinkedListDeque <Integer> (3);
+		LinkedListDeque L =new LinkedListDeque<Integer>();
 		L.addFirst(2);
 		L.addFirst(1);
+		L.addFirst(0);
 
-		assertEquals(L.get(2), 3);
+		L.printDeque();
+		assertEquals(2,L.get(2));
+		assertEquals(1,L.get(1));
+		assertEquals(0,L.get(0));
+		assertEquals(null,L.get(3));
 	}
 
 	@Test
 	public void testLinkedListDeque2() {
-		LinkedListDeque L =new LinkedListDeque <Integer> ();
+		LinkedListDeque L =new LinkedListDeque<Integer>();
 		L.addLast(3);
 		L.addLast(2);
 		L.addLast(1);
 
-		assertEquals(L.get(2), 1);
-		assertEquals(L.get(1), 2);
-		assertEquals(L.get(0), 3);
+		L.printDeque();
+		assertEquals(3, L.size());
+		assertEquals(3, L.get(0));
+		assertEquals(2, L.get(1));
+		assertEquals(1, L.get(2));
+
 	}
 
 	@Test
 	public void testDequeRemoveEmpty() {
-		LinkedListDeque L =new LinkedListDeque <Integer> (3);
+		LinkedListDeque L = new LinkedListDeque<Integer>();
+		L.addLast(3);
 		L.addLast(2);
 		L.addLast(1);
 		L.removeFirst();
@@ -125,7 +134,8 @@ public class LinkedListDequeTest {
 
 	@Test
 	public void testDequePrint() {
-		LinkedListDeque L =new LinkedListDeque <Integer> (3);
+		LinkedListDeque L =new LinkedListDeque<Integer>();
+		L.addLast(3);
 		L.addLast(2);
 		L.addLast(1);
 //		L.removeLast();

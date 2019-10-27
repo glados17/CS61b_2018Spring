@@ -6,12 +6,12 @@ public class ArrayDeque <T> {
 
 
     /**change below to private when test */
-    private int length;
-    private T[] arr;
-    private int nextFirst;
-    private int nextLast;
-    private double thresholdRateUp = 0.75;
-    private double thresholdRateDown = 0.25;
+    public int length;
+    public T[] arr;
+    public int nextFirst;
+    public int nextLast;
+    public double thresholdRateUp = 0.75;
+    public double thresholdRateDown = 0.25;
 
 
     public ArrayDeque(){
@@ -124,12 +124,13 @@ public class ArrayDeque <T> {
         return res;
     }
 
-    public void arrayRemoveLast(){
+    public T arrayRemoveLast(){
         nextLast = getUpdateLast(-1);
         size--;
         T res = arr[nextLast];
         arr[nextLast] = null;
-    } return resl
+        return res;
+    }
 
     public T arrayGet(int index){
         int realIndex = nextFirst + 1 + index;
