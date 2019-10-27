@@ -71,6 +71,7 @@ public class LinkedListDeque<LochNess> {
     public LochNess removeFirst(){
         LochNess res = sentinel.next.item;
         sentinel.next = sentinel.next.next;
+        sentinel.next.prev = sentinel;
         size--;
         return res;
     }
@@ -78,6 +79,7 @@ public class LinkedListDeque<LochNess> {
     public LochNess removeLast(){
         LochNess res = sentinel.prev.item;
         sentinel.prev = sentinel.prev.prev;
+        sentinel.prev.next = sentinel;
         size--;
         return res;
     }
